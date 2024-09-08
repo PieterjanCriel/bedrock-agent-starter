@@ -49,7 +49,7 @@ export class BedrockStarterStack extends cdk.Stack {
 
       // System prompt
       instruction: `
-          TODO -- but let's make it file in an report;
+          Put your instruction here.
       `,
       enableUserInput: false,
       shouldPrepareAgent: true,
@@ -64,8 +64,8 @@ export class BedrockStarterStack extends cdk.Stack {
     agent.role.addToPolicy(llmInvokeBedrockPolicyStatement);
 
     const actionGroup = new AgentActionGroup(this, "MyActionGroup", {
-      actionGroupName: "action-group-todo-interaction",
-      description: "Action group to interact with todo's",
+      actionGroupName: "action-group",
+      description: "Action group",
       actionGroupExecutor: {
         lambda: actionGroupLambda, // Specify that this action group will execute via the previously defined Lambda function
       },
@@ -74,8 +74,8 @@ export class BedrockStarterStack extends cdk.Stack {
         functions: [
           // Define individual functions within the action group.
           {
-            description: "get user info by first name and account name", // Description of the function.
-            name: "get-user-info", // Name of the function.
+            description: "description of doing some action", // Description of the function.
+            name: "do-some-action", // Name of the function.
             parameters: {
               // Define parameters required for the function.
               first_name: {
@@ -83,8 +83,8 @@ export class BedrockStarterStack extends cdk.Stack {
                 required: true, // This parameter is required.
                 type: "string", // Specify the data type.
               },
-              account_name: {
-                description: "account name",
+              last_name: {
+                description: "last name of the user",
                 required: false, // This parameter is optional.
                 type: "string",
               },
